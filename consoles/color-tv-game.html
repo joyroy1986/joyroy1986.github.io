@@ -3,111 +3,184 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Color TV-Game 详细介绍 | 任天堂历代游戏机馆</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/julianolf/jekyll-theme-8bit/assets/css/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <title>纳米光催化技术 - 企业官网示例</title>
   <style>
+    /* ===== 全局 ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: "Courier New", Courier, monospace;
-      background: #000;
-      color: #fff;
-      margin: 0;
-      padding: 0;
+      font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+      color: #333;
+      line-height: 1.6;
     }
-    .detail {
-      max-width: 820px;
+    a { text-decoration: none; }
+    .container {
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 24px;
+      padding: 0 20px;
     }
-    h1 {
-      font-family: 'Press Start 2P', cursive;
-      font-size: 1.6em;
-      color: #fcee09;
-      text-shadow: 2px 2px #ff003c;
-      margin-bottom: 6px;
+
+    /* ===== 导航栏 ===== */
+    header {
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
-    h2 {
-      font-family: 'Press Start 2P', cursive;
-      font-size: 1.1em;
-      color: #fcee09;
-      border-bottom: 1px dashed #00ffcc;
-      padding-bottom: 6px;
-      margin-top: 32px;
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
     }
-    p, li {
-      line-height: 1.7;
-      font-size: 1.05em;
+    .logo {
+      font-size: 1.4em;
+      font-weight: bold;
+      color: #0056b3;
     }
-    .meta { color: #00ffcc; }
-    .card {
-      background: #111;
-      border: 2px solid #00ffcc;
-      box-shadow: 4px 4px #ff003c;
-      padding: 16px 20px;
-      margin: 16px 0;
+    .nav-links a {
+      margin-left: 24px;
+      color: #555;
+      font-size: 0.95em;
     }
-    img.shot {
-      max-width: 100%;
-      height: auto;
-      border: 2px solid #00ffcc;
-      margin: 10px 0;
-      image-rendering: pixelated;
+    .nav-links a:hover { color: #0056b3; }
+
+    /* ===== 首屏大图 Hero ===== */
+    .hero {
+      background: linear-gradient(135deg, #0056b3, #00a8e8);
+      color: #fff;
+      padding: 80px 0;
+      text-align: center;
     }
-    .back {
+    .hero h1 {
+      font-size: 2.5em;
+      margin-bottom: 16px;
+    }
+    .hero p {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+      opacity: .9;
+    }
+    .btn {
       display: inline-block;
-      margin-top: 24px;
-      color: #00ffcc;
-      font-family: 'Press Start 2P', cursive;
-      font-size: .8em;
-      text-decoration: none;
+      background: #ffcc00;
+      color: #333;
+      padding: 12px 32px;
+      border-radius: 4px;
+      font-weight: bold;
     }
-    a { color: #00ffcc; }
+    .btn:hover { background: #ffdb4d; }
+
+    /* ===== 核心优势 ===== */
+    .advantages {
+      padding: 60px 0;
+      background: #f8f9fa;
+    }
+    .section-title {
+      text-align: center;
+      font-size: 1.8em;
+      margin-bottom: 40px;
+      color: #0056b3;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+    }
+    .card {
+      background: #fff;
+      padding: 24px;
+      border-radius: 6px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.08);
+      text-align: center;
+    }
+    .card h3 {
+      color: #0056b3;
+      margin-bottom: 12px;
+    }
+
+    /* ===== 产品分类 ===== */
+    .products {
+      padding: 60px 0;
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .product-item {
+      border: 1px solid #eee;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .product-item img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      background: #ddd;
+    }
+    .product-item .info {
+      padding: 16px;
+    }
+    .product-item h4 {
+      color: #0056b3;
+      margin-bottom: 8px;
+    }
+
+    /* ===== 应用场景 ===== */
+    .scenarios {
+      padding: 60px 0;
+      background: #f8f9fa;
+    }
+    .scenario-item {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+    .scenario-item:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+    .scenario-item img {
+      width: 45%;
+      border-radius: 6px;
+      background: #ddd;
+      height: 200px;
+      object-fit: cover;
+    }
+    .scenario-text { width: 55%; }
+
+    /* ===== 底部 ===== */
+    footer {
+      background: #222;
+      color: #ccc;
+      padding: 40px 0 20px;
+    }
+    footer .container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    footer h4 { color: #fff; margin-bottom: 12px; }
+    footer p { margin-bottom: 6px; font-size: 0.9em; }
+    .copyright {
+      text-align: center;
+      margin-top: 30px;
+      padding-top: 16px;
+      border-top: 1px solid #444;
+      font-size: 0.85em;
+      color: #888;
+    }
+
+    /* 响应式 */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero h1 { font-size: 1.8em; }
+      .scenario-item, .scenario-item:nth-child(even) {
+        flex-direction: column;
+      }
+      .scenario-item img, .scenario-text { width: 100%; }
+    }
   </style>
 </head>
-<body>
-  <div class="detail">
-    <h1>Color TV-Game 系列</h1>
-    <p class="meta">发售时间：1977 年起（主力型号 1977 年，Racing 112 为 1978 年）</p>
-
-    <div class="card">
-      <h2>一句话概况</h2>
-      <p>Color TV-Game 是任天堂早期以自主品牌推出的家用电视游戏专用机系列，采用“主机内置游戏、不插卡带”的方案，主打 Pong 类、赛车类和打砖块类。它与三菱电机等合作研发，是任天堂从电子玩具走向电视游戏的重要起点，为后来 FC 积累了硬件和渠道经验。</p>
-    </div>
-
-    <h2>主要机型</h2>
-    <div class="card">
-      <ul>
-        <li><b>Color TV-Game 6</b>：6 种 Pong 变体，旋钮/手柄操作，1977 年。</li>
-        <li><b>Color TV-Game 15</b>：15 种 Pong 变体，配色和手感更完善，销量最高，1977 年。</li>
-        <li><b>Color TV-Game Racing 112</b>：附带方向盘，112 种赛车变体，1978 年。</li>
-        <li><b>Color TV-Game Block Breaker</b>：打砖块玩法，旋转拨盘，1977–1978 年。</li>
-      </ul>
-    </div>
-
-    <h2>规格参数（以 15 为例）</h2>
-    <div class="card">
-      <ul>
-        <li>输出：连接电视机（RF/AV，因型号而异）</li>
-        <li>游戏：主机内置，不更换卡带</li>
-        <li>控制器：硬接线旋钮/手柄/拨盘/方向盘（依型号）</li>
-        <li>电源：外接电源适配器</li>
-        <li>市场：主要面向日本本土</li>
-      </ul>
-    </div>
-
-    <h2>机器图片</h2>
-    <div class="card">
-      <p>把自制的像素图或实机图传到 <code>images/color-tv-game/</code>，再改下面文件名即可。还没图可先删掉这两个 img。</p>
-      <img class="shot" src="/images/color-tv-game/main.png" alt="Color TV-Game 主图">
-      <img class="shot" src="/images/color-tv-game/controllers.png" alt="Color TV-Game 控制器">
-    </div>
-
-    <h2>历史意义</h2>
-    <div class="card">
-      <p>在 FC 之前，Color TV-Game 验证了“接电视、内置游戏、低价家用”的路线。Color TV-Game 15 销量达百万级，帮助任天堂在 1970 年代末站稳电视游戏硬件市场，也培养了后续 Game &amp; Watch、FC 的研发与发行体系。</p>
-    </div>
-
-    <a class="back" href="/">« 返回主机馆首页</a>
-  </div>
-</body>
-</html>
+<body
