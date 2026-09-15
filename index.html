@@ -9,7 +9,6 @@ layout: default
 </head>
 
 <style>
-  /* 基础页面样式 */
   body {
     font-family: "Courier New", Courier, monospace;
     background-color: #000;
@@ -17,8 +16,6 @@ layout: default
     margin: 0;
     padding: 0;
   }
-
-  /* 中间内容容器，提升层级避免被侧边图遮挡 */
   .page-wrap {
     position: relative;
     z-index: 1;
@@ -27,7 +24,6 @@ layout: default
     padding: 20px;
     text-align: center;
   }
-
   h1 {
     font-family: 'Press Start 2P', cursive;
     font-size: 1.8em;
@@ -86,54 +82,44 @@ layout: default
     margin-right: 15px;
     image-rendering: pixelated;
   }
-.console-item h2 a {
-  color: #fcee09;
-  text-decoration: none;
-}
-.console-item h2 a:hover {
-  text-decoration: underline;
-}
-.detail-link {
-  display: inline-block;
-  margin-top: 8px;
-  color: #00ffcc;
-}
-  /* 左右两侧固定背景图 */
+  .console-item h2 a {
+    color: #fcee09;
+    text-decoration: none;
+  }
+  .console-item h2 a:hover {
+    text-decoration: underline;
+  }
+  .detail-link {
+    display: inline-block;
+    margin-top: 8px;
+    color: #00ffcc;
+  }
   .side-bg {
     position: fixed;
     top: 0;
-    width: 280px;        /* 侧边图宽度，可按需改到 300px */
-    height: 100vh;       /* 撑满整屏高度 */
-    object-fit: cover;   /* 铺满允许裁剪；若要完整显示不裁，改 contain */
+    width: 280px;
+    height: 100vh;
+    object-fit: cover;
     z-index: 0;
     opacity: 0.6;
     pointer-events: none;
   }
-  .side-bg.left {
-    left: 0;
-  }
-  .side-bg.right {
-    right: 0;
-  }
-
-  /* 小屏幕隐藏侧边图，避免与中间内容重叠 */
+  .side-bg.left { left: 0; }
+  .side-bg.right { right: 0; }
   @media (max-width: 1400px) {
-    .side-bg {
-      display: none;
-    }
+    .side-bg { display: none; }
   }
 </style>
 
-<!-- 左右两侧固定装饰图（右侧若显示破图，请检查 images/zelda-side.png 是否已上传、文件名大小写是否完全一致） -->
 <img src="images/mario-kart-side.png" class="side-bg left" alt="Mario Kart">
 <img src="images/zelda-side.png" class="side-bg right" alt="Zelda">
 
-<!-- 中间内容区域 -->
 <div class="page-wrap">
   <h1>欢迎来到任天堂历代游戏机馆</h1>
   <p class="subtitle">从 Color TV-Game 到 Switch 2 的静态展示。</p>
 
-  <li class="console-item">
+  <ul class="console-list">
+    <li class="console-item">
       <div class="console-title">
         <img src="images/colortv-game.png" alt="Color TV-Game 像素图" class="logo-pixel">
         <h2><a href="consoles/color-tv-game.html">Color TV-Game 系列</a></h2>
