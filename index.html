@@ -40,12 +40,25 @@ layout: default
     padding: 15px 20px;
     box-shadow: 4px 4px #ff003c;
   }
-  .console-item h2 {
-    color: #fcee09;
+  /* 新增：标题和图片并排 */
+  .console-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
     margin: 0 0 10px 0;
-    font-size: 1.8em;
     border-bottom: 1px dashed #00ffcc;
     padding-bottom: 5px;
+  }
+  .console-title img.logo-pixel {
+    height: 28px;
+    width: auto;
+    flex-shrink: 0;
+    image-rendering: pixelated;
+  }
+  .console-title h2 {
+    color: #fcee09;
+    margin: 0;
+    font-size: 1.8em;
   }
   .console-item p {
     color: #fff;
@@ -67,7 +80,10 @@ layout: default
 
 <ul class="console-list">
   <li class="console-item">
-    <h2>Color TV-Game 系列</h2>
+    <div class="console-title">
+      <img src="images/colortv-game.png" alt="Color TV-Game 像素图" class="logo-pixel">
+      <h2>Color TV-Game 系列</h2>
+    </div>
     <p><span class="year">1977年</span> - 任天堂最早涉足电子游戏市场的家用机系列，开启了传奇序幕。</p>
   </li>
   <li class="console-item">
