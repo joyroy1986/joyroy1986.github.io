@@ -3,35 +3,74 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>飞博纳米（练习）</title>
+<title>飞博纳米（练习 · 完整版）</title>
 <style>
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{font-family:"Microsoft YaHei",sans-serif;background:#f4f7fb;color:#333;line-height:1.6;}
-  .top-bar{background:#f8f9fa;padding:5px 20px;display:flex;justify-content:space-between;font-size:13px;color:#666;border-bottom:1px solid #eee;}
+  body{font-family:"Microsoft YaHei","PingFang SC",sans-serif;background:#f4f7fb;color:#333;line-height:1.6;}
+  a{text-decoration:none;color:inherit;}
+
+  /* 顶部信息条 */
+  .top-bar{background:#f8f9fa;padding:8px 20px;display:flex;justify-content:space-between;flex-wrap:wrap;font-size:13px;color:#666;border-bottom:1px solid #eee;gap:10px;}
+  @media(max-width:768px){.top-bar{justify-content:center;text-align:center;}}
+
+  /* 导航 */
   header{background:#fff;padding:15px 40px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,0.05);}
   .logo{font-size:22px;font-weight:bold;color:#005b9f;}
-  nav a{margin-left:25px;color:#333;text-decoration:none;font-size:15px;transition:.3s;}
+  nav a{margin-left:25px;color:#333;font-size:15px;transition:.3s;position:relative;}
   nav a:hover{color:#005b9f;}
-  .hero{height:400px;background:linear-gradient(135deg,#001f3f,#005b9f);display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;animation:fadeIn 1s ease;}
-  .hero h1{font-size:42px;margin-bottom:15px;text-shadow:0 2px 10px rgba(0,0,0,0.2);}
-  .hero p{font-size:18px;opacity:.9;}
-  .section{padding:60px 20px;text-align:center;}
-  .title{font-size:28px;color:#005b9f;margin-bottom:40px;opacity:0;transform:translateY(20px);transition:.8s;}
-  .cards{display:flex;justify-content:center;gap:30px;flex-wrap:wrap;max-width:1000px;margin:0 auto;}
-  .card{background:#fff;padding:30px 20px;border-radius:8px;width:300px;box-shadow:0 5px 20px rgba(0,0,0,0.05);opacity:0;transform:translateY(30px);transition:.8s;cursor:pointer;}
-  .card:hover{transform:translateY(-10px);box-shadow:0 10px 30px rgba(0,91,159,0.15);}
+  nav a::after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:2px;background:#005b9f;transition:.3s;}
+  nav a:hover::after{width:100%;}
+  #burger{display:none;font-size:26px;background:none;border:0;cursor:pointer;color:#005b9f;}
+  @media(max-width:768px){
+    header{padding:15px 20px;}
+    nav{position:absolute;top:100%;left:0;width:100%;background:#fff;flex-direction:column;max-height:0;overflow:hidden;transition:.3s;box-shadow:0 4px 10px rgba(0,0,0,0.05);}
+    nav.open{max-height:360px;}
+    nav a{margin:0;padding:14px 20px;border-top:1px solid #f0f0f0;}
+    #burger{display:block;}
+  }
+
+  /* 首屏轮播 */
+  .hero{position:relative;height:440px;overflow:hidden;color:#fff;}
+  .slide{position:absolute;inset:0;opacity:0;transition:opacity 1s ease;background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;text-align:center;}
+  .slide::before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(0,20,40,.5),rgba(0,40,90,.5));}
+  .slide .txt{position:relative;padding:0 20px;animation:fadeIn 1s ease;}
+  .slide h1{font-size:42px;margin-bottom:15px;text-shadow:0 2px 10px rgba(0,0,0,.3);}
+  .slide p{font-size:18px;opacity:.95;}
+  .slide .btn{display:inline-block;margin-top:20px;background:#ff9302;color:#fff;padding:12px 28px;border-radius:4px;font-weight:bold;transition:.3s;}
+  .slide .btn:hover{background:#e68200;}
+  .hero .dots{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:2;}
+  .hero .dots span{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.5);cursor:pointer;transition:.3s;}
+  .hero .dots span.on{background:#ff9302;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+  @media(max-width:768px){.slide h1{font-size:30px;}.slide p{font-size:15px;}}
+
+  /* 通用区块 */
+  .section{padding:60px 20px;max-width:1100px;margin:0 auto;}
+  .title{font-size:28px;color:#005b9f;text-align:center;margin-bottom:40px;opacity:0;transform:translateY(20px);transition:.8s;}
+  .title.show{opacity:1;transform:translateY(0);}
+
+  /* 带背景图的区块 */
+  .bg-section{background-size:cover;background-position:center;position:relative;}
+  .bg-section::before{content:"";position:absolute;inset:0;background:rgba(255,255,255,.86);}
+  .bg-section .section{position:relative;}
+
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:25px;}
+  .card{background:#fff;padding:28px 22px;border-radius:8px;box-shadow:0 5px 18px rgba(0,0,0,0.06);opacity:0;transform:translateY(30px);transition:.6s;cursor:default;}
+  .card.show{opacity:1;transform:translateY(0);}
+  .card:hover{transform:translateY(-8px);box-shadow:0 12px 28px rgba(0,91,159,.15);}
+  .card .pic{width:100%;height:150px;object-fit:cover;border-radius:6px;margin-bottom:15px;}
   .card h4{font-size:20px;color:#005b9f;margin-bottom:10px;}
   .card p{font-size:14px;color:#666;}
-  .show{opacity:1;transform:translateY(0);}
+
+  /* 底部 */
   footer{background:#0b1b34;color:#cdd6e4;padding:40px 20px;text-align:center;}
-  footer a{color:#7fd0ff;text-decoration:none;}
-  #top{position:fixed;right:20px;bottom:20px;width:40px;height:40px;border:none;background:#005b9f;color:#fff;font-size:20px;border-radius:50%;cursor:pointer;display:none;box-shadow:0 2px 10px rgba(0,0,0,0.2);}
-  @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
-  @media(max-width:768px){
-    .top-bar{flex-direction:column;align-items:center;gap:5px;}
-    nav a{margin-left:10px;font-size:14px;}
-    .hero h1{font-size:32px;}
-  }
+  footer h3{color:#fff;margin-bottom:15px;}
+  footer a{color:#7fd0ff;}
+  footer a:hover{text-decoration:underline;}
+
+  /* 返回顶部 */
+  #top{position:fixed;right:20px;bottom:20px;width:42px;height:42px;border:none;background:#005b9f;color:#fff;font-size:20px;border-radius:50%;cursor:pointer;display:none;box-shadow:0 2px 10px rgba(0,0,0,.2);z-index:99;transition:.3s;}
+  #top:hover{background:#004080;}
 </style>
 </head>
 <body>
@@ -44,66 +83,96 @@
 
 <header>
   <div class="logo">飞博纳米（练习）</div>
-  <nav>
+  <div id="burger">☰</div>
+  <nav id="menu">
     <a href="#">主页</a>
-    <a href="#">产品系列</a>
-    <a href="#">工程案例</a>
-    <a href="#">资讯中心</a>
-    <a href="#">联系我们</a>
+    <a href="#adv">产品系列</a>
+    <a href="#case">工程案例</a>
+    <a href="#news">技术原理</a>
+    <a href="#contact">联系我们</a>
   </nav>
 </header>
 
+<!-- 首屏轮播：光伏 + 雕塑 背景 -->
 <section class="hero">
-  <div>
-    <h1>纳米自洁涂层解决方案</h1>
-    <p>光催化 · 超亲水 · 长期保护建筑与光伏表面</p>
+  <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1600&q=70')">
+    <div class="txt"><h1>光伏自洁 · 提升发电</h1><p>超亲水涂层减少灰尘沉积，让每一块光伏板保持高效</p><a class="btn" href="#case">查看案例</a></div>
+  </div>
+  <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1564399680071-5c0a1e3b1b0e?auto=format&fit=crop&w=1600&q=70')">
+    <div class="txt"><h1>雕塑石材 · 长久如新</h1><p>户外雕塑、石材表面持久抗污，降低维护成本</p><a class="btn" href="#case">应用场景</a></div>
+  </div>
+  <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1559302504-0d04c9c4d7c0?auto=format&fit=crop&w=1600&q=70')">
+    <div class="txt"><h1>纳米自洁涂层解决方案</h1><p>光催化 · 超亲水 · 长期保护建筑与光伏表面</p><a class="btn" href="#contact">获取方案</a></div>
+  </div>
+  <div class="dots" id="dots"></div>
+</section>
+
+<!-- 应用场景：带光伏背景图 -->
+<section id="case" class="bg-section" style="background-image:url('https://images.unsplash.com/photo-1559302504-0d04c9c4d7c0?auto=format&fit=crop&w=1600&q=70')">
+  <div class="section">
+    <h3 class="title">应用场景</h3>
+    <div class="cards">
+      <div class="card"><img class="pic" src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=600&q=60" alt="光伏"><h4>光伏电站</h4><p>减少灰尘导致的发电损失，提升能源效率。</p></div>
+      <div class="card"><img class="pic" src="https://images.unsplash.com/photo-1564399680071-5c0a1e3b1b0e?auto=format&fit=crop&w=600&q=60" alt="雕塑"><h4>雕塑石材</h4><p>户外艺术品、石材立面持久抗污自洁。</p></div>
+      <div class="card"><img class="pic" src="https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=600&q=60" alt="玻璃幕墙"><h4>玻璃幕墙</h4><p>透明自洁涂层，雨水冲刷即可保持通透。</p></div>
+    </div>
   </div>
 </section>
 
-<section class="section">
-  <h3 class="title show">应用场景</h3>
-  <div class="cards">
-    <div class="card show"><h4>建筑外墙</h4><p>长效自洁，保持建筑外观如新，降低清洗频率。</p></div>
-    <div class="card show"><h4>光伏电站</h4><p>减少灰尘导致的发电损失，提升能源效率。</p></div>
-    <div class="card show"><h4>玻璃幕墙</h4><p>透明自洁涂层，雨水冲刷即可保持通透。</p></div>
+<!-- 技术原理：带建筑/外墙背景图 -->
+<section id="news" class="bg-section" style="background-image:url('https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=1600&q=70')">
+  <div class="section">
+    <h3 class="title">技术原理</h3>
+    <div class="cards">
+      <div class="card"><h4>光催化</h4><p>TiO₂ 在光照下产生自由基，分解表面有机污渍。</p></div>
+      <div class="card"><h4>超亲水</h4><p>雨水不再成珠，均匀铺展把灰尘冲走。</p></div>
+      <div class="card"><h4>长期保护</h4><p>附带抗菌、防紫外、空气净化等附加功能。</p></div>
+    </div>
   </div>
 </section>
 
-<section class="section">
-  <h3 class="title show">技术原理</h3>
-  <div class="cards">
-    <div class="card show"><h4>光催化</h4><p>TiO₂ 在光照下产生自由基，分解表面有机污渍。</p></div>
-    <div class="card show"><h4>超亲水</h4><p>雨水不再成珠，均匀铺展把灰尘冲走。</p></div>
-    <div class="card show"><h4>长期保护</h4><p>附带抗菌、防紫外、空气净化等附加功能。</p></div>
-  </div>
-</section>
-
-<footer>
-  <h3 style="color:#fff;margin-bottom:15px;">联系我们</h3>
+<footer id="contact">
+  <h3>联系我们</h3>
   <p>电话：0731-89875607 ｜ 邮箱：780769464@qq.com</p>
-  <p style="margin-top:10px;"><a href="color-tv-game.html">← 返回任天堂练习详情页</a></p>
+  <p style="margin-top:12px;"><a href="color-tv-game.html">← 返回任天堂练习详情页</a></p>
 </footer>
 
 <button id="top">↑</button>
 
 <script>
+  // 汉堡菜单
+  const burger=document.getElementById('burger'), menu=document.getElementById('menu');
+  burger.addEventListener('click',()=>menu.classList.toggle('open'));
+
+  // 首屏轮播
+  const slides=document.querySelectorAll('.hero .slide');
+  const dotsBox=document.getElementById('dots');
+  let cur=0;
+  slides.forEach((_,i)=>{
+    const s=document.createElement('span');
+    if(i===0)s.className='on';
+    s.addEventListener('click',()=>go(i));
+    dotsBox.appendChild(s);
+  });
+  const dots=dotsBox.querySelectorAll('span');
+  function go(i){
+    slides[cur].style.opacity=0;dots[cur].classList.remove('on');
+    cur=(i+slides.length)%slides.length;
+    slides[cur].style.opacity=1;dots[cur].classList.add('on');
+  }
+  slides[0].style.opacity=1;
+  setInterval(()=>go(cur+1),5000);
+
   // 滚动出现动画
-  const io = new IntersectionObserver((es) => {
-    es.forEach(e => { 
-      if (e.isIntersecting) { 
-        e.target.classList.add('show'); 
-        io.unobserve(e.target); 
-      } 
-    });
-  }, { threshold: 0.15 });
-  document.querySelectorAll('.card, .title').forEach(el => io.observe(el));
+  const io=new IntersectionObserver((es)=>{
+    es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target);}});
+  },{threshold:0.15});
+  document.querySelectorAll('.card,.title').forEach(el=>io.observe(el));
 
   // 返回顶部
-  const top = document.getElementById('top');
-  window.addEventListener('scroll', () => { 
-    top.style.display = window.scrollY > 300 ? 'block' : 'none'; 
-  });
-  top.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  const top=document.getElementById('top');
+  window.addEventListener('scroll',()=>{top.style.display=window.scrollY>300?'block':'none';});
+  top.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 </script>
 </body>
 </html>
