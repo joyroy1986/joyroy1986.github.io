@@ -1,1 +1,6 @@
-title: test
+title: 任天堂历代游戏机馆
+description: 从Color TV-Game到Switch 2的静态展示
+remote_theme: julianolf/jekyll-theme-8bit
+markdown: kramdown
+plugins:
+  - jekyll-remote-theme
