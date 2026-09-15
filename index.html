@@ -86,7 +86,18 @@ layout: default
     margin-right: 15px;
     image-rendering: pixelated;
   }
-
+.console-item h2 a {
+  color: #fcee09;
+  text-decoration: none;
+}
+.console-item h2 a:hover {
+  text-decoration: underline;
+}
+.detail-link {
+  display: inline-block;
+  margin-top: 8px;
+  color: #00ffcc;
+}
   /* 左右两侧固定背景图 */
   .side-bg {
     position: fixed;
@@ -122,13 +133,14 @@ layout: default
   <h1>欢迎来到任天堂历代游戏机馆</h1>
   <p class="subtitle">从 Color TV-Game 到 Switch 2 的静态展示。</p>
 
-  <ul class="console-list">
-    <li class="console-item">
+  <li class="console-item">
       <div class="console-title">
         <img src="images/colortv-game.png" alt="Color TV-Game 像素图" class="logo-pixel">
-        <h2>Color TV-Game 系列</h2>
+        <h2><a href="consoles/color-tv-game.html">Color TV-Game 系列</a></h2>
       </div>
-      <p><span class="year">1977年</span> - 任天堂最早涉足电子游戏市场的家用机系列，开启了传奇序幕。</p>
+      <p><span class="year">1977年</span> - 任天堂最早涉足电子游戏市场的家用机系列，开启了传奇序幕。
+        <br><a class="detail-link" href="consoles/color-tv-game.html">查看详细介绍 »</a>
+      </p>
     </li>
     <li class="console-item">
       <h2>Family Computer (FC / NES)</h2>
