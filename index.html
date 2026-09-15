@@ -9,15 +9,25 @@ layout: default
 </head>
 
 <style>
+  /* 基础页面样式 */
   body {
     font-family: "Courier New", Courier, monospace;
     background-color: #000;
     color: #fff;
-    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* 中间内容容器，提升层级避免被侧边图遮挡 */
+  .page-wrap {
+    position: relative;
+    z-index: 1;
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
+    text-align: center;
   }
+
   h1 {
     font-family: 'Press Start 2P', cursive;
     font-size: 1.8em;
@@ -76,65 +86,98 @@ layout: default
     margin-right: 15px;
     image-rendering: pixelated;
   }
+
+  /* 左右两侧固定背景图 */
+  .side-bg {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 250px;
+    height: 80vh;
+    object-fit: cover;
+    z-index: 0; /* 放在侧边图层级，page-wrap 是 1，所以侧图在下面 */
+    opacity: 0.55;
+    pointer-events: none;
+  }
+  .side-bg.left {
+    left: 10px;
+  }
+  .side-bg.right {
+    right: 10px;
+  }
+
+  /* 小屏幕隐藏侧边图，避免拥挤 */
+  @media (max-width: 1300px) {
+    .side-bg {
+      display: none;
+    }
+  }
 </style>
 
-<h1>欢迎来到任天堂历代游戏机馆</h1>
-<p class="subtitle">从 Color TV-Game 到 Switch 2 的静态展示。</p>
+<!-- 左右两侧固定装饰图 -->
+<img src="images/mario-kart-side.png" class="side-bg left" alt="Mario Kart">
+<img src="images/zelda-side.png" class="side-bg right" alt="Zelda">
 
-<ul class="console-list">
-  <li class="console-item">
-    <div class="console-title">
-      <img src="images/colortv-game.png" alt="Color TV-Game 像素图" class="logo-pixel">
-      <h2>Color TV-Game 系列</h2>
-    </div>
-    <p><span class="year">1977年</span> - 任天堂最早涉足电子游戏市场的家用机系列，开启了传奇序幕。</p>
-  </li>
-  <li class="console-item">
-    <h2>Family Computer (FC / NES)</h2>
-    <p><span class="year">1983年</span> - 红白机，拯救了北美游戏业，带来了《超级马里奥》《塞尔达传说》等不朽名作。</p>
-  </li>
-  <li class="console-item">
-    <h2>Game Boy</h2>
-    <p><span class="year">1989年</span> - 横空出世的掌机霸主，灰绿屏幕却承载了无数人的《俄罗斯方块》和《宝可梦》回忆。</p>
-  </li>
-  <li class="console-item">
-    <h2>Super Famicom (SFC / SNES)</h2>
-    <p><span class="year">1990年</span> - 超级任天堂，16位机时代的画质与音效巅峰。</p>
-  </li>
-  <li class="console-item">
-    <h2>Nintendo 64 (N64)</h2>
-    <p><span class="year">1996年</span> - 率先踏入3D游戏时代，《超级马里奥64》重新定义了3D游戏视角。</p>
-  </li>
-  <li class="console-item">
-    <h2>Game Boy Advance (GBA)</h2>
-    <p><span class="year">2001年</span> - 32位掌机，横版卷轴游戏的终极形态。</p>
-  </li>
-  <li class="console-item">
-    <h2>Nintendo GameCube (NGC)</h2>
-    <p><span class="year">2001年</span> - 小巧的紫色方块主机，拥有《塞尔达传说：风之杖》等神作。</p>
-  </li>
-  <li class="console-item">
-    <h2>Nintendo DS</h2>
-    <p><span class="year">2004年</span> - 双屏触控掌机，再次颠覆掌机玩法。</p>
-  </li>
-  <li class="console-item">
-    <h2>Wii</h2>
-    <p><span class="year">2006年</span> - 体感革命，让全年龄层都拿起了手柄。</p>
-  </li>
-  <li class="console-item">
-    <h2>Nintendo 3DS</h2>
-    <p><span class="year">2011年</span> - 无需眼镜的裸眼3D掌机，延续了掌机辉煌。</p>
-  </li>
-  <li class="console-item">
-    <h2>Wii U</h2>
-    <p><span class="year">2012年</span> - 带有屏幕的GamePad，虽市场受挫但为Switch铺平了道路。</p>
-  </li>
-  <li class="console-item">
-    <h2>Nintendo Switch</h2>
-    <p><span class="year">2017年</span> - 家用掌机一体化的划时代杰作，全球现象级热销。</p>
-  </li>
-  <li class="console-item">
-    <h2>Nintendo Switch 2</h2>
-    <p><span class="year">2025年</span> - 新一代主机降临，续写任天堂的传奇篇章。</p>
-  </li>
-</ul>
+<!-- 中间内容区域 -->
+<div class="page-wrap">
+  <h1>欢迎来到任天堂历代游戏机馆</h1>
+  <p class="subtitle">从 Color TV-Game 到 Switch 2 的静态展示。</p>
+
+  <ul class="console-list">
+    <li class="console-item">
+      <div class="console-title">
+        <img src="images/colortv-game.png" alt="Color TV-Game 像素图" class="logo-pixel">
+        <h2>Color TV-Game 系列</h2>
+      </div>
+      <p><span class="year">1977年</span> - 任天堂最早涉足电子游戏市场的家用机系列，开启了传奇序幕。</p>
+    </li>
+    <li class="console-item">
+      <h2>Family Computer (FC / NES)</h2>
+      <p><span class="year">1983年</span> - 红白机，拯救了北美游戏业，带来了《超级马里奥》《塞尔达传说》等不朽名作。</p>
+    </li>
+    <li class="console-item">
+      <h2>Game Boy</h2>
+      <p><span class="year">1989年</span> - 横空出世的掌机霸主，灰绿屏幕却承载了无数人的《俄罗斯方块》和《宝可梦》回忆。</p>
+    </li>
+    <li class="console-item">
+      <h2>Super Famicom (SFC / SNES)</h2>
+      <p><span class="year">1990年</span> - 超级任天堂，16位机时代的画质与音效巅峰。</p>
+    </li>
+    <li class="console-item">
+      <h2>Nintendo 64 (N64)</h2>
+      <p><span class="year">1996年</span> - 率先踏入3D游戏时代，《超级马里奥64》重新定义了3D游戏视角。</p>
+    </li>
+    <li class="console-item">
+      <h2>Game Boy Advance (GBA)</h2>
+      <p><span class="year">2001年</span> - 32位掌机，横版卷轴游戏的终极形态。</p>
+    </li>
+    <li class="console-item">
+      <h2>Nintendo GameCube (NGC)</h2>
+      <p><span class="year">2001年</span> - 小巧的紫色方块主机，拥有《塞尔达传说：风之杖》等神作。</p>
+    </li>
+    <li class="console-item">
+      <h2>Nintendo DS</h2>
+      <p><span class="year">2004年</span> - 双屏触控掌机，再次颠覆掌机玩法。</p>
+    </li>
+    <li class="console-item">
+      <h2>Wii</h2>
+      <p><span class="year">2006年</span> - 体感革命，让全年龄层都拿起了手柄。</p>
+    </li>
+    <li class="console-item">
+      <h2>Nintendo 3DS</h2>
+      <p><span class="year">2011年</span> - 无需眼镜的裸眼3D掌机，延续了掌机辉煌。</p>
+    </li>
+    <li class="console-item">
+      <h2>Wii U</h2>
+      <p><span class="year">2012年</span> - 带有屏幕的GamePad，虽市场受挫但为Switch铺平了道路。</p>
+    </li>
+    <li class="console-item">
+      <h2>Nintendo Switch</h2>
+      <p><span class="year">2017年</span> - 家用掌机一体化的划时代杰作，全球现象级热销。</p>
+    </li>
+    <li class="console-item">
+      <h2>Nintendo Switch 2</h2>
+      <p><span class="year">2025年</span> - 新一代主机降临，续写任天堂的传奇篇章。</p>
+    </li>
+  </ul>
+</div>
